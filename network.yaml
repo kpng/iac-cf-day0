@@ -1,0 +1,21 @@
+Resources:
+  VPC:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/vpc.yaml
+
+  Gateway:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/gateway.yaml
+      # Parameters:
+        # VPCId: !GetAtt VPC.Outputs.StackVPCId
+        # VPCId: !ImportValue VPCId
+
+  # Subnet:
+  #   Type: AWS::CloudFormation::Stack
+  #   Properties:
+  #     TemplateURL: ./modules/subnet.yaml
+  #     Parameters:
+  #       VPCId: !GetAtt VPC.Outputs.VPCId
+

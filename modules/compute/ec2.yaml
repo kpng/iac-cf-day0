@@ -1,0 +1,17 @@
+Parameters:
+  ec2InstanceType:
+    Type: String
+    Default: t3.small
+
+  ec2ImageId:
+    Type: String
+    Default: ami-0c802847a7dd848c0
+
+
+Resources:
+  thisEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref ec2InstanceType
+      ImageId: !Ref ec2ImageId
+      # SubnetId: !GetAtt thisPublicSubnet1.SubnetId      

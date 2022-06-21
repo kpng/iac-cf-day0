@@ -1,0 +1,53 @@
+Parameters:
+  thisSubnetIpBlocks:
+    Type: CommaDelimitedList
+    Default: "10.0.0.0/24, 10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24"
+    
+  thisAZ1:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Subnet::AvailabilityZoneId>
+    Default: /aws/service/global-infrastructure/availability-zones/apse1-az1
+
+  thisAZ2:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Subnet::AvailabilityZoneId>
+    Default: /aws/service/global-infrastructure/availability-zones/apse1-az2
+
+Resources:
+  thisPublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref thisVPC
+      AvailabilityZoneId: !Ref thisAZ1
+      CidrBlock: !Select [0, !Ref thisSubnetIpBlocks]
+      Tags:
+        - Key: Name
+          Value: day0-Subnet-public1
+
+  thisPublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref thisVPC
+      AvailabilityZoneId: !Ref thisAZ2
+      CidrBlock: !Select [1, !Ref thisSubnetIpBlocks]
+      Tags:
+        - Key: Name
+          Value: day0-Subnet-public2
+
+  thisPrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref thisVPC
+      AvailabilityZoneId: !Ref thisAZ1
+      CidrBlock: !Select [2, !Ref thisSubnetIpBlocks]
+      Tags:
+        - Key: Name
+          Value: day0-Subnet-private1
+
+  thisPrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref thisVPC
+      AvailabilityZoneId: !Ref thisAZ2
+      CidrBlock: !Select [3, !Ref thisSubnetIpBlocks]
+      Tags:
+        - Key: Name
+          Value: day0-Subnet-private2
