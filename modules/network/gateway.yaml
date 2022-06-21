@@ -1,0 +1,15 @@
+Resources:
+  thisIGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: Name
+        Value: day0
+
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !ImportValue 
+        'Fn::Sub': 'VPCID'
+      InternetGatewayId: !Ref thisIGW

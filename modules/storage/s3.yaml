@@ -1,0 +1,11 @@
+Parameters:
+  thisBucketName:
+    Type: String
+    Default: day0-kp-2022
+
+Resources:
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Ref thisBucketName
