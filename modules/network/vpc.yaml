@@ -21,8 +21,5 @@ Resources:
 
 Outputs:
   StackVPC:
-    Value: !Ref thisVPC
-    Export:
-      Name:
-        'Fn::Sub': 'VPCID'
+    Value: !GetAtt thisVPC.VPCId
 

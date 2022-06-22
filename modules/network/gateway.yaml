@@ -1,3 +1,7 @@
+Parameters:
+  VPCId:
+    Type: String
+
 Resources:
   thisIGW:
     Type: AWS::EC2::InternetGateway
