@@ -9,7 +9,8 @@ build:
     before_script:
         - uname -a
         - pwd
-        - make
+        - ls /usr/bin/make
+        - /usr/bin/make --version
     script:
         - make deploy
     artifacts:
