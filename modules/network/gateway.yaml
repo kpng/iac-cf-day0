@@ -14,6 +14,10 @@ Resources:
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      VpcId: !ImportValue 
-        'Fn::Sub': 'VPCID'
+      VpcId: !Ref VPCId
       InternetGatewayId: !Ref thisIGW
+
+
+Outputs:
+  StackIGWId:
+    Value: !GetAtt thisIGW.InternetGatewayId

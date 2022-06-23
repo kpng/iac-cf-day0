@@ -1,8 +1,7 @@
 # Parameter defnintions
 ENV = dev
 STACK = network compute storage
-DELETE_STACK = $(ENV)-network $(ENV)-compute $(ENV)-storage
-LAST_STACK = $(ENV)-storage
+DELETE_STACK = $(ENV)-storage $(ENV)-compute $(ENV)-network
 TEMPLATE_EXT = yaml
 myTemplateS3Bucket = day0-kp
 
@@ -10,7 +9,6 @@ myTemplateS3Bucket = day0-kp
 # DO NOT CHANGE ANYTHING BELOW
 empty:
 	@echo "Usage:\n make deploy\n make destroy\n "
-
 
 upload:
 	@aws s3 cp ./modules/. s3://${myTemplateS3Bucket} --recursive

@@ -1,4 +1,7 @@
 Parameters:
+  SubnetID:
+    Type: String
+
   ec2InstanceType:
     Type: String
     Default: t3.small
@@ -14,4 +17,15 @@ Resources:
     Properties:
       InstanceType: !Ref ec2InstanceType
       ImageId: !Ref ec2ImageId
-      # SubnetId: !GetAtt thisPublicSubnet1.SubnetId      
+      # SubnetId: !Ref SubnetID
+
+  # thisEIP:
+  #   Type: AWS::EC2::EIP
+  #   Properties:
+  #     Domain: vpc
+  #     InstanceId: !Ref thisEC2
+
+
+Outputs:
+  StackEC2Id:
+    Value: !Ref thisEC2

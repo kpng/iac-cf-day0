@@ -20,6 +20,6 @@ Resources:
           Value: day0-VPC
 
 Outputs:
-  StackVPC:
-    Value: !GetAtt thisVPC.VPCId
+  StackVPCId:
+    Value: !GetAtt thisVPC.VpcId
 

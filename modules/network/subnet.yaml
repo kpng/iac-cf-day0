@@ -1,4 +1,7 @@
 Parameters:
+  VPCId:
+    Type: String
+
   thisSubnetIpBlocks:
     Type: CommaDelimitedList
     Default: "10.0.0.0/24, 10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24"
@@ -15,7 +18,7 @@ Resources:
   thisPublicSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref thisVPC
+      VpcId: !Ref VPCId
       AvailabilityZoneId: !Ref thisAZ1
       CidrBlock: !Select [0, !Ref thisSubnetIpBlocks]
       Tags:
@@ -25,7 +28,7 @@ Resources:
   thisPublicSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref thisVPC
+      VpcId: !Ref VPCId
       AvailabilityZoneId: !Ref thisAZ2
       CidrBlock: !Select [1, !Ref thisSubnetIpBlocks]
       Tags:
@@ -35,7 +38,7 @@ Resources:
   thisPrivateSubnet1:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref thisVPC
+      VpcId: !Ref VPCId
       AvailabilityZoneId: !Ref thisAZ1
       CidrBlock: !Select [2, !Ref thisSubnetIpBlocks]
       Tags:
@@ -45,9 +48,30 @@ Resources:
   thisPrivateSubnet2:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref thisVPC
+      VpcId: !Ref VPCId
       AvailabilityZoneId: !Ref thisAZ2
       CidrBlock: !Select [3, !Ref thisSubnetIpBlocks]
       Tags:
         - Key: Name
           Value: day0-Subnet-private2
+
+Outputs:
+  PublicSubnet1Id:
+    Value: !GetAtt thisPublicSubnet1.SubnetId
+    Export:
+      Name: PublicSubnet1ID
+
+  PublicSubnet2Id:
+    Value: !GetAtt thisPublicSubnet2.SubnetId
+    Export:
+      Name: PublicSubnet2ID
+
+  PrivateSubnet1Id:
+    Value: !GetAtt thisPrivateSubnet1.SubnetId
+    Export:
+      Name: PrivateSubnet1ID
+
+  PrivateSubnet2Id:
+    Value: !GetAtt thisPrivateSubnet2.SubnetId
+    Export:
+      Name: PrivateSubnet2ID

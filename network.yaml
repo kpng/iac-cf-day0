@@ -8,14 +8,24 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/gateway.yaml
-      # Parameters:
-        # VPCId: !GetAtt VPC.Outputs.StackVPCId
-        # VPCId: !ImportValue VPCId
+      Parameters:
+        VPCId: !GetAtt VPC.Outputs.StackVPCId
 
-  # Subnet:
-  #   Type: AWS::CloudFormation::Stack
-  #   Properties:
-  #     TemplateURL: ./modules/subnet.yaml
-  #     Parameters:
-  #       VPCId: !GetAtt VPC.Outputs.VPCId
+  Subnet:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/subnet.yaml
+      Parameters:
+        VPCId: !GetAtt VPC.Outputs.StackVPCId
 
+  Route: 
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/route.yaml
+      Parameters:
+        VPCId: !GetAtt VPC.Outputs.StackVPCId
+        IGWId: !GetAtt Gateway.Outputs.StackIGWId
+        PublicSubnet1Id: !GetAtt Subnet.Outputs.PublicSubnet1Id
+        PublicSubnet2Id: !GetAtt Subnet.Outputs.PublicSubnet2Id
+        PrivateSubnet1Id: !GetAtt Subnet.Outputs.PrivateSubnet1Id
+        PrivateSubnet2Id: !GetAtt Subnet.Outputs.PrivateSubnet2Id
