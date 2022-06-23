@@ -9,8 +9,9 @@ build:
     before_script:
         - uname -a
         - pwd
-        - ls /usr/bin/make
-        - /usr/bin/make --version
+        - sudo apt-get update
+        - sudo apt-get install -y make
+        - sudo apt install -y build-essential
     script:
         - make deploy
     artifacts:
