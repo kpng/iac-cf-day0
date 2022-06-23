@@ -6,6 +6,9 @@ stages:
 
 build:
     stage: build
+    before_script:
+        - uname -a
+        - sudo apt update
     script:
         - make deploy
     artifacts:
