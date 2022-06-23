@@ -1,19 +1,17 @@
+image: ubuntu:latest
+
 stages:
     - build
-    # - test
+
 
 build:
     stage: build
+    before_script:
+        - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        - unzip awscliv2.zip
+        - sudo ./aws/install
     script:
-        - echo "Building"
-        # - mkdir build
         - make deploy
     artifacts:
         paths:
             - build/
-
-# test:
-#     stage: test
-#     script:
-#         - echo "Testing"
-#         - test -f "build/info.txt"
