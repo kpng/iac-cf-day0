@@ -1,5 +1,5 @@
-# image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-image: ubuntu:latest
+image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+# image: ubunt/u:latest
 
 stages:
     - build
