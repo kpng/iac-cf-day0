@@ -17,13 +17,13 @@ Resources:
     Properties:
       InstanceType: !Ref ec2InstanceType
       ImageId: !Ref ec2ImageId
-      # SubnetId: !Ref SubnetID
+      SubnetId: !Ref SubnetID
 
-  # thisEIP:
-  #   Type: AWS::EC2::EIP
-  #   Properties:
-  #     Domain: vpc
-  #     InstanceId: !Ref thisEC2
+  thisEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref thisEC2
 
 
 Outputs:

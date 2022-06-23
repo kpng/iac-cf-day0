@@ -1,18 +1,15 @@
 image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-# image: ubunt/u:latest
 
 stages:
     - build
-
 
 build:
     stage: build
     before_script:
         - uname -a
-        - pwd
         - apt-get update
         - apt-get install -y make
-        - apt install -y build-essential
+        # - apt install -y build-essential
     script:
         - make deploy
     artifacts:
