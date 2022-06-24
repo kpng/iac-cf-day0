@@ -2,6 +2,24 @@ Parameters:
   SubnetID:
     Type: String
 
+  SecurityGroupID:
+    Type: String 
+
+  ec2IAMInstanceProfileName:
+    Type: String
+
+  S3BucketName:
+    Type: String
+
+  downloadFolder:
+    Type: String
+    Default: /download
+
+  fileDownloadUrl:
+    Type: String
+    Default: https://filesamples.com/samples/code/json/sample4.json
+
+
   ec2InstanceType:
     Type: String
     Default: t3.small
@@ -16,8 +34,20 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: !Ref ec2InstanceType
+      IamInstanceProfile: !Ref ec2IAMInstanceProfileName
       ImageId: !Ref ec2ImageId
       SubnetId: !Ref SubnetID
+      SecurityGroupIds:
+        - !Ref SecurityGroupID
+      UserData:
+        Fn::Base64: !Sub |
+            #!/bin/bash
+            sudo yum update
+            sudo yum install jq -y
+            mkdir ${downloadFolder}
+            sudo wget ${fileDownloadUrl} -P ${downloadFolder}/
+            cd ${downloadFolder}
+            aws s3 cp * s3://${S3BucketName}
 
   thisEIP:
     Type: AWS::EC2::EIP

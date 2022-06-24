@@ -4,6 +4,13 @@ Resources:
     Properties:
       TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/vpc.yaml
 
+  Security:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/network/security.yaml
+      Parameters:
+        VPCId: !GetAtt VPC.Outputs.StackVPCId
+
   Gateway:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -29,3 +36,25 @@ Resources:
         PublicSubnet2Id: !GetAtt Subnet.Outputs.PublicSubnet2Id
         PrivateSubnet1Id: !GetAtt Subnet.Outputs.PrivateSubnet1Id
         PrivateSubnet2Id: !GetAtt Subnet.Outputs.PrivateSubnet2Id
+
+  IAM:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/iam/role.yaml
+
+  s3:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/storage/s3.yaml
+
+  EC2:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/compute/ec2.yaml
+      Parameters:
+        SubnetID: !GetAtt Subnet.Outputs.PublicSubnet1Id
+        SecurityGroupID: !GetAtt Security.Outputs.StackSecurityGroupId
+        ec2IAMInstanceProfileName: !GetAtt IAM.Outputs.ec2IAMInstanceProfileName
+        S3BucketName: !GetAtt s3.Outputs.StackS3BucketName
+        # ec2accessS3RoleID: !ImportValue ec2accessS3RoleID
+

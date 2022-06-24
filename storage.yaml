@@ -1,5 +1,0 @@
-Resources:
-  s3:
-    Type: AWS::CloudFormation::Stack
-    Properties:
-      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/storage/s3.yaml

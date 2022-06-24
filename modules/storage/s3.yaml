@@ -9,3 +9,7 @@ Resources:
     DeletionPolicy: Delete
     Properties:
       BucketName: !Ref thisBucketName
+
+Outputs:
+  StackS3BucketName:
+    Value: !Ref S3Bucket

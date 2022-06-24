@@ -58,20 +58,13 @@ Resources:
 Outputs:
   PublicSubnet1Id:
     Value: !GetAtt thisPublicSubnet1.SubnetId
-    Export:
-      Name: PublicSubnet1ID
 
   PublicSubnet2Id:
     Value: !GetAtt thisPublicSubnet2.SubnetId
-    Export:
-      Name: PublicSubnet2ID
 
   PrivateSubnet1Id:
     Value: !GetAtt thisPrivateSubnet1.SubnetId
-    Export:
-      Name: PrivateSubnet1ID
 
   PrivateSubnet2Id:
     Value: !GetAtt thisPrivateSubnet2.SubnetId
-    Export:
-      Name: PrivateSubnet2ID
+

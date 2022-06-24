@@ -12,6 +12,6 @@ build:
         # - apt install -y build-essential
     script:
         - make deploy
-    artifacts:
-        paths:
-            - build/
+    # artifacts:
+    #     paths:
+    #         - build/

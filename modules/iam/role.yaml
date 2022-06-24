@@ -1,0 +1,36 @@
+Resources:
+  ec2accessS3Role:
+    Type: AWS::IAM::Role
+    Properties: 
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'    
+      Description: Role for ec2 to access s3
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      # MaxSessionDuration: Integer
+      # Path: String
+      # PermissionsBoundary: String
+      # Policies: 
+        # - Policy
+      RoleName: ec2-access-s3
+
+  ec2IAMInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: ec2-access-s3-instance-profile
+      Roles:
+        - !Ref ec2accessS3Role
+
+Outputs:
+  ec2IAMInstanceProfileName:
+    Value: !Ref ec2IAMInstanceProfile
+
+  ec2accessS3RoleId:
+    Value: !GetAtt ec2accessS3Role.RoleId

@@ -1,0 +1,20 @@
+Parameters:
+  VPCId:
+    Type: String
+
+Resources:
+  thisSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPCId
+      GroupDescription: for ec2 traffic
+      SecurityGroupIngress:
+        - IpProtocol: "-1"
+          CidrIp: 3.0.5.0/24
+      SecurityGroupEgress:
+        - IpProtocol: "-1"
+          CidrIp: 0.0.0.0/0          
+
+Outputs:
+  StackSecurityGroupId:
+    Value: !GetAtt thisSG.GroupId
