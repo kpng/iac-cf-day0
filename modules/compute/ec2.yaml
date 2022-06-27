@@ -44,6 +44,7 @@ Resources:
             #!/bin/bash
             sudo yum update
             sudo yum install jq -y
+            sudo yum install amazon-cloudwatch-agent -y
             mkdir ${downloadFolder}
             sudo wget ${fileDownloadUrl} -P ${downloadFolder}/
             cd ${downloadFolder}

@@ -1,0 +1,11 @@
+Parameters:
+  thisLogGroupName:
+    Type: String
+    Default: myLogGroup
+
+Resources:
+  myLogGroup: 
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Ref thisLogGroupName
+      RetentionInDays: 7

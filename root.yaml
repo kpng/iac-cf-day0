@@ -56,5 +56,8 @@ Resources:
         SecurityGroupID: !GetAtt Security.Outputs.StackSecurityGroupId
         ec2IAMInstanceProfileName: !GetAtt IAM.Outputs.ec2IAMInstanceProfileName
         S3BucketName: !GetAtt s3.Outputs.StackS3BucketName
-        # ec2accessS3RoleID: !ImportValue ec2accessS3RoleID
 
+  cloudwatch:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://day0-kp.s3.ap-southeast-1.amazonaws.com/cloudwatch/loggroup.yaml

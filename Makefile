@@ -8,7 +8,7 @@ myTemplateS3Bucket = day0-kp
 
 # DO NOT CHANGE ANYTHING BELOW
 empty:
-	@echo "Usage:\n make deploy\n make destroy\n "
+	@echo "\nUsage:\n make deploy\n make destroy\n "
 
 upload:
 	@aws s3 cp ./modules/. s3://${myTemplateS3Bucket} --recursive
