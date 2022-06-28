@@ -17,7 +17,3 @@ infra_build:
     # artifacts:
     #     paths:
     #         - build/
-
-test:
-    stage: test
-    script:
