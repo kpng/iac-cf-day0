@@ -19,6 +19,9 @@ Parameters:
     Type: String
     Default: https://filesamples.com/samples/code/json/sample4.json
 
+  thisAWSRegion:
+    Type: String
+    Default: ap-southeast-1
 
   ec2InstanceType:
     Type: String
@@ -40,16 +43,22 @@ Resources:
       SecurityGroupIds:
         - !Ref SecurityGroupID
       UserData:
+      # Reference: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html
         Fn::Base64: !Sub |
             #!/bin/bash
-            sudo yum update
+            sudo yum update -y
+            sudo yum install -y awslogs
+            sudo sed -i 's/us-east-1/${thisAWSRegion}' awscli.conf
+            sudo systemctl start awslogsd
+
             sudo yum install jq -y
-            sudo yum install amazon-cloudwatch-agent -y
+
             mkdir ${downloadFolder}
             sudo wget ${fileDownloadUrl} -P ${downloadFolder}/
             cd ${downloadFolder}
             aws s3 cp * s3://${S3BucketName}
 
+            logger `jq '.people' ${downloadFolder}/*`
   thisEIP:
     Type: AWS::EC2::EIP
     Properties:

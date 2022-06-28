@@ -1,16 +1,13 @@
 # iac-cf
 
-
-
-## Getting started
-## Name
 This is using AWS CloudFormation to provision:
 - VPC
 - 2 public and 2 private subnets
 - 1 internet gateway
 - 1 route table
 - IAM instance profile for EC2 to access S3
-- EC2 instance which has awscli support, installed with make, jq, and AWS CloudWatch Agent
+- EC2 instance which has awscli support, installed with make, jq
+- EC2 userdata script will download a json file, parse it to cloudwatch
 - S3 bucket for storing sample json file
   
 

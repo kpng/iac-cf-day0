@@ -4,7 +4,7 @@ STACK = root
 DELETE_STACK = $(ENV)-root
 TEMPLATE_EXT = yaml
 myTemplateS3Bucket = day0-kp
-
+myS3Bucket = ${myTemplateS3Bucket}-2022
 
 # DO NOT CHANGE ANYTHING BELOW
 empty:
