@@ -1,9 +1,9 @@
 # Parameter defnintions
 ENV = dev
-STACK = root
-DELETE_STACK = $(ENV)-root
+STACK = day0
 TEMPLATE_EXT = yaml
-myTemplateS3Bucket = day0-kp
+DELETE_STACK = $(ENV)-$(STACK)
+myTemplateS3Bucket = $(STACK)-kp
 myS3Bucket = ${myTemplateS3Bucket}-2022
 
 # DO NOT CHANGE ANYTHING BELOW
@@ -13,9 +13,12 @@ empty:
 upload:
 	@aws s3 cp ./modules/. s3://${myTemplateS3Bucket} --recursive
 
+emptyS3:
+	@aws s3 rm s3://${myS3Bucket} --recursive
+
 deploy: upload $(STACK)
 
-destroy: $(DELETE_STACK)
+destroy: emptyS3 $(DELETE_STACK)
 
 $(STACK):
 	@aws cloudformation deploy --capabilities CAPABILITY_NAMED_IAM --template-file $@.$(TEMPLATE_EXT) --stack-name $(ENV)-$@
