@@ -2,7 +2,7 @@ image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
 
 stages:
     - infra_build
-    - test
+    - infra_delete
 
 
 infra_build:
@@ -14,6 +14,10 @@ infra_build:
         # - apt install -y build-essential
     script:
         - make deploy
-    # artifacts:
-    #     paths:
-    #         - build/
+
+infra_delete:
+    stage: infra_delete
+    script:
+        - make destroy
+    when: manual
+    
